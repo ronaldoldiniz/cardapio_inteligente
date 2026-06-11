@@ -208,6 +208,17 @@ function setupFavoritesModal() {
   });
 }
 
+function setupQrCodeModal() {
+  const overlay = document.getElementById('qrcode-modal');
+  const openBtn = document.getElementById('btn-qrcode');
+  const closeBtn = document.getElementById('qrcode-close');
+  if (!overlay || !openBtn || !closeBtn) return;
+
+  openBtn.addEventListener('click', () => overlay.classList.add('open'));
+  closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+}
+
 // ---- Share / Copy ----
 
 async function shareCombination() {
@@ -247,6 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNavbar();
   setupHeroCards();
   setupFavoritesModal();
+  setupQrCodeModal();
   setupScrollAnimations();
   restoreLastSelection();
 });

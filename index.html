@@ -21,6 +21,7 @@
         <a href="#dicas">Dicas</a>
       </div>
       <div class="nav-right">
+        <button class="btn-icon" id="btn-qrcode" type="button" aria-label="Mostrar QR Code">📱</button>
         <button class="btn-icon theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema">🌙</button>
         <button class="btn-icon" id="btn-favorites" type="button" aria-label="Favoritos">⭐</button>
         <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
@@ -283,6 +284,20 @@
         <button class="modal-close" id="fav-close" type="button" aria-label="Fechar">✕</button>
       </div>
       <div id="fav-content"></div>
+    </div>
+  </div>
+
+  <!-- ===== QR Code Modal ===== -->
+  <div class="modal-overlay" id="qrcode-modal" role="dialog" aria-label="QR Code para acesso">
+    <div class="modal" style="max-width: 360px; text-align: center;">
+      <div class="modal-header">
+        <h3>📱 Acessar no Celular</h3>
+        <button class="modal-close" id="qrcode-close" type="button" aria-label="Fechar">✕</button>
+      </div>
+      <div style="padding: var(--space-md) 0;">
+        <img src="qrcode.png" alt="QR Code para a página" style="margin: 0 auto; display: block; border-radius: var(--radius-sm); width: 200px; height: 200px; box-shadow: var(--shadow-md);" />
+        <p style="margin-top: var(--space-md); font-size: .85rem; color: var(--clr-text-secondary);">Escaneie o código acima com a câmera do seu celular para abrir a página instantaneamente.</p>
+      </div>
     </div>
   </div>
 
