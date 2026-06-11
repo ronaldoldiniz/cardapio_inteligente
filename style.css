@@ -324,6 +324,12 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 .food-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
 .food-card .food-emoji { font-size: 2.2rem; margin-bottom: var(--space-xs); }
+.papaya-icon {
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.15em;
+  display: inline-block;
+}
 .food-card .food-name { font-weight: 700; font-size: .9rem; color: var(--clr-primary); }
 .food-card .food-group-label {
   display: inline-block; margin: var(--space-xs) 0;

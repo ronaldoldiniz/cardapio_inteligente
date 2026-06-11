@@ -291,6 +291,13 @@ function setupScrollAnimations() {
   document.querySelectorAll('.section').forEach(el => observer.observe(el));
 }
 
+const PAPAYA_SVG = `<svg class="papaya-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C15,2 18,5 18,10 C18,15.5 15,22 12,22 C9,22 6,15.5 6,10 C6,5 9,2 12,2 Z" fill="#F5B041"/><path d="M12,4 C14,4 16,6.5 16,10.5 C16,15 14,20 12,20 C10,20 8,15 8,10.5 C8,6.5 10,4 12,4 Z" fill="#FF7043"/><path d="M12,7 C13.1,7 14,8.5 14,11 C14,13.5 13.1,16 12,16 C10.9,16 10,13.5 10,11 C10,8.5 10.9,7 12,7 Z" fill="#D84315"/><circle cx="12" cy="9" r="1" fill="#212121"/><circle cx="11.2" cy="10" r="0.9" fill="#212121"/><circle cx="12.8" cy="10" r="0.9" fill="#212121"/><circle cx="12" cy="11" r="1" fill="#212121"/><circle cx="11.2" cy="12" r="0.9" fill="#212121"/><circle cx="12.8" cy="12" r="0.9" fill="#212121"/><circle cx="12" cy="13" r="1" fill="#212121"/><circle cx="12" cy="14.2" r="0.8" fill="#212121"/></svg>`;
+
+function getFoodEmojiHtml(f) {
+  if (f.name === 'Mamão') return PAPAYA_SVG;
+  return f.emoji;
+}
+
 // ---- Food Guide ----
 
 function renderFoodGuide() {
@@ -306,7 +313,7 @@ function renderFoodGuide() {
   function renderCards(group) {
     container.innerHTML = FOODS.filter(f => f.group === group).map(f => `
       <div class="food-card">
-        <div class="food-emoji">${f.emoji}</div>
+        <div class="food-emoji">${getFoodEmojiHtml(f)}</div>
         <div class="food-name">${f.name}</div>
         <div class="food-group-label">${GROUP_LABELS[f.group]}</div>
         <div class="food-kcal">~${f.kcal} kcal</div>
@@ -342,7 +349,7 @@ function renderBuilder() {
         <div class="builder-options" role="radiogroup" aria-label="Selecione ${GROUP_LABELS[group]}">
           ${foods.map(f => `
             <button class="builder-option" data-group="${group}" data-name="${f.name}" aria-pressed="false" type="button">
-              ${f.emoji} ${f.name} <span class="opt-kcal">(${f.kcal})</span>
+              ${getFoodEmojiHtml(f)} ${f.name} <span class="opt-kcal">(${f.kcal})</span>
             </button>
           `).join('')}
         </div>
@@ -453,7 +460,7 @@ function updateBuilderResult() {
 
   const itemNames = selected.map(g => {
     const f = findFood(selection[g]);
-    return f ? `${f.emoji} ${f.name}` : '';
+    return f ? `${getFoodEmojiHtml(f)} ${f.name}` : '';
   }).join(' + ');
 
   resultEl.className = 'builder-result';
