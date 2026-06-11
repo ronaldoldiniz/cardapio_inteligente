@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Café da Manhã Inteligente — Monte combinações equilibradas de café da manhã com calculadora energética, cardápio semanal e dicas de alimentação saudável.">
+  <title>Café da Manhã Inteligente</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar" id="navbar" aria-label="Navegação principal">
+    <div class="container">
+      <a href="#" class="navbar-brand" aria-label="Início">☕ Café Inteligente</a>
+      <div class="nav-links" id="nav-links">
+        <a href="#por-que">Por quê?</a>
+        <a href="#guia">Guia</a>
+        <a href="#montar">Montar</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#sugestoes">Sugestões</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#dicas">Dicas</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <header class="hero section" id="hero">
+    <div class="container">
+      <div class="hero-emoji" aria-hidden="true">🍳☕🥑</div>
+      <h1>Café da Manhã Inteligente</h1>
+      <p>Monte combinações equilibradas para começar o dia com mais energia, praticidade e consciência alimentar.</p>
+      <div class="hero-actions">
+        <a href="#montar" class="btn btn-primary">🍽️ Montar meu café</a>
+        <a href="#cardapio" class="btn btn-secondary">📅 Ver cardápio semanal</a>
+      </div>
+      <div class="hero-cards">
+        <div class="hero-mini-card">☕ Bebida</div>
+        <div class="hero-mini-card">🍞 Carboidrato</div>
+        <div class="hero-mini-card">🥚 Proteína</div>
+        <div class="hero-mini-card">🍎 Fruta</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Por que o café da manhã inteligente? ===== -->
+  <section class="section" id="por-que">
+    <div class="container">
+      <h2 class="section-title">Por que o café da manhã inteligente?</h2>
+      <p class="section-subtitle">Uma refeição equilibrada pode combinar diferentes grupos de alimentos que se complementam para fornecer energia, saciedade e nutrientes ao longo da manhã.</p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="emoji" aria-hidden="true">⚡</div>
+          <h3>Fonte de Energia</h3>
+          <p>Carboidratos fornecem a energia principal para as atividades do dia.</p>
+        </div>
+        <div class="why-card">
+          <div class="emoji" aria-hidden="true">💪</div>
+          <h3>Construção e Saciedade</h3>
+          <p>Proteínas ajudam na saciedade e na manutenção dos tecidos do corpo.</p>
+        </div>
+        <div class="why-card">
+          <div class="emoji" aria-hidden="true">🍇</div>
+          <h3>Fibras, Vitaminas e Minerais</h3>
+          <p>Frutas contribuem com fibras, vitaminas e minerais essenciais.</p>
+        </div>
+        <div class="why-card">
+          <div class="emoji" aria-hidden="true">💧</div>
+          <h3>Hidratação</h3>
+          <p>Bebidas adequadas ajudam a manter a hidratação desde o início do dia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Guia de Opções ===== -->
+  <section class="section" id="guia" style="background:var(--clr-surface-alt);">
+    <div class="container">
+      <h2 class="section-title">Guia de Opções por Grupo Alimentar</h2>
+      <p class="section-subtitle">Explore as opções disponíveis em cada grupo. Valores calóricos são aproximados e podem variar conforme marca, preparo e porção.</p>
+      <div id="food-guide-tabs" class="food-group-tabs"></div>
+      <div id="food-guide-cards" class="food-cards-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Monte seu café da manhã ===== -->
+  <section class="section" id="montar">
+    <div class="container">
+      <h2 class="section-title">Monte seu Café da Manhã</h2>
+      <p class="section-subtitle">Selecione um alimento de cada grupo e veja o resumo da sua combinação.</p>
+
+      <div id="builder-groups" class="builder-groups"></div>
+
+      <div id="builder-result" class="builder-result empty">
+        <p>Selecione pelo menos um alimento de cada grupo para ver o resumo.</p>
+      </div>
+
+      <div class="builder-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-clear" type="button">🗑️ Limpar seleção</button>
+        <button class="btn btn-primary btn-sm" id="btn-random" type="button">🎲 Combinação aleatória equilibrada</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Calculadora Energética ===== -->
+  <section class="section" id="calculadora" style="background:var(--clr-surface-alt);">
+    <div class="container">
+      <h2 class="section-title">Calculadora Energética Estimada</h2>
+      <p class="section-subtitle">Estime seu gasto energético diário e descubra a faixa sugerida para o café da manhã.</p>
+
+      <form class="calc-form" id="calc-form" novalidate>
+        <div class="calc-row">
+          <label for="calc-sexo">
+            Sexo
+            <select id="calc-sexo" required>
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+            </select>
+          </label>
+          <label for="calc-idade">
+            Idade (anos)
+            <input type="number" id="calc-idade" min="1" max="120" placeholder="Ex: 30" required>
+          </label>
+        </div>
+        <div class="calc-row">
+          <label for="calc-peso">
+            Peso (kg)
+            <input type="number" id="calc-peso" min="10" max="400" step="0.1" placeholder="Ex: 70" required>
+          </label>
+          <label for="calc-altura">
+            Altura (cm)
+            <input type="number" id="calc-altura" min="50" max="280" placeholder="Ex: 170" required>
+          </label>
+        </div>
+        <label for="calc-atividade">
+          Nível de atividade
+          <select id="calc-atividade" required>
+            <option value="1.2">Sedentário</option>
+            <option value="1.375">Leve</option>
+            <option value="1.55" selected>Moderado</option>
+            <option value="1.725">Intenso</option>
+          </select>
+        </label>
+        <label for="calc-objetivo">
+          Objetivo
+          <select id="calc-objetivo" required>
+            <option value="manutencao">Manutenção</option>
+            <option value="reducao">Redução leve</option>
+            <option value="ganho">Ganho leve</option>
+          </select>
+        </label>
+        <p id="calc-error" style="display:none;color:var(--clr-red);font-size:.85rem;font-weight:600;">Preencha todos os campos corretamente.</p>
+        <button class="btn btn-primary" type="submit">📊 Calcular</button>
+      </form>
+
+      <div class="calc-result" id="calc-result">
+        <h3>Resultado Estimado</h3>
+        <div class="calc-stats">
+          <div class="calc-stat">
+            <div class="stat-value" id="stat-tmb">—</div>
+            <div class="stat-label">TMB</div>
+          </div>
+          <div class="calc-stat">
+            <div class="stat-value" id="stat-get">—</div>
+            <div class="stat-label">GET</div>
+          </div>
+          <div class="calc-stat">
+            <div class="stat-value" id="stat-meta">—</div>
+            <div class="stat-label">Meta diária</div>
+          </div>
+          <div class="calc-stat">
+            <div class="stat-value" id="stat-faixa">—</div>
+            <div class="stat-label">Faixa café da manhã</div>
+          </div>
+        </div>
+        <div class="calc-comparison" id="calc-comparison" style="display:none;"></div>
+      </div>
+
+      <div class="calc-disclaimer">
+        ⚠️ Os cálculos são estimativas educativas e não substituem avaliação individual feita por nutricionista ou profissional de saúde.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Combinações Sugeridas ===== -->
+  <section class="section" id="sugestoes">
+    <div class="container">
+      <h2 class="section-title">Combinações Sugeridas</h2>
+      <p class="section-subtitle">Combinações prontas para inspirar seu café da manhã. Filtre por perfil alimentar.</p>
+      <div id="filter-bar" class="filter-bar"></div>
+      <div id="suggestions-grid" class="suggestions-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Cardápio Semanal ===== -->
+  <section class="section" id="cardapio" style="background:var(--clr-surface-alt);">
+    <div class="container">
+      <h2 class="section-title">Cardápio Semanal Sugerido</h2>
+      <p class="section-subtitle">Uma sugestão de cardápio variado para a semana inteira.</p>
+      <div id="weekly-grid" class="weekly-grid"></div>
+      <div style="text-align:center;margin-top:var(--space-lg);">
+        <button class="btn btn-primary btn-sm" id="btn-shopping" type="button">🛒 Gerar lista de compras</button>
+      </div>
+      <div id="shopping-list" class="shopping-list"></div>
+    </div>
+  </section>
+
+  <!-- ===== Dicas Saudáveis ===== -->
+  <section class="section" id="dicas">
+    <div class="container">
+      <h2 class="section-title">Dicas Saudáveis</h2>
+      <p class="section-subtitle">Pequenas mudanças fazem grande diferença. Confira dicas para melhorar seu café da manhã.</p>
+      <div id="tips-grid" class="tips-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>Material educativo — <strong>Café da Manhã Inteligente</strong></p>
+      <p class="footer-disclaimer">Estimativas nutricionais aproximadas. Consulte um profissional para orientação individualizada.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
