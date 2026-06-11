@@ -713,16 +713,146 @@ function shuffleWeeklyMenu() {
 }
 
 function printWeeklyMenu() {
-  let text = '📅 CARDÁPIO SEMANAL — Café da Manhã Inteligente\n\n';
+  let rowsHtml = '';
   weeklyMenu.forEach(w => {
     const kcal = calcCombinationKcal(w.items, w.drink);
-    text += `${w.day}: ${w.items.join(' + ')} | ${w.drink} (~${kcal} kcal)\n`;
+    const drinkFood = findFood(w.drink);
+    const drinkEmojiHtml = drinkFood ? getFoodEmojiHtml(drinkFood) : '🥤';
+    const itemsHtml = w.items.map(name => {
+      const f = findFood(name);
+      return f ? `${getFoodEmojiHtml(f)} ${f.name}` : name;
+    }).join(' + ');
+
+    rowsHtml += `
+      <tr>
+        <td class="day-col">${w.day}</td>
+        <td>${drinkEmojiHtml} ${w.drink}</td>
+        <td>${itemsHtml}</td>
+        <td class="kcal-col">~${kcal} kcal</td>
+      </tr>
+    `;
   });
+
   const win = window.open('', '_blank');
   if (win) {
-    win.document.write(`<pre style="font-family:sans-serif;font-size:14px;padding:24px;line-height:1.8;">${text}</pre>`);
-    win.document.title = 'Cardápio Semanal';
-    win.print();
+    win.document.write(`
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+      <head>
+        <meta charset="UTF-8">
+        <title>Cardápio Semanal — Café da Manhã Inteligente</title>
+        <style>
+          body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #3E2723;
+            margin: 0;
+            padding: 40px 24px;
+            background: #fff;
+          }
+          .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #D84315;
+            padding-bottom: 20px;
+          }
+          .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #4E342E;
+            font-weight: 800;
+          }
+          .header p {
+            margin: 6px 0 0;
+            font-size: 14px;
+            color: #6D4C41;
+            font-weight: 600;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            font-size: 14px;
+          }
+          th, td {
+            border: 1px solid #D7CCC8;
+            padding: 12px 16px;
+            text-align: left;
+          }
+          th {
+            background-color: #F5EDE0;
+            color: #3E2723;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+          }
+          tr:nth-child(even) {
+            background-color: #FDF8F0;
+          }
+          .day-col {
+            font-weight: 700;
+            color: #D84315;
+            width: 15%;
+          }
+          .kcal-col {
+            font-weight: 700;
+            color: #4E342E;
+            text-align: right;
+            width: 15%;
+          }
+          .papaya-icon {
+            width: 1.15em;
+            height: 1.15em;
+            vertical-align: -0.15em;
+            display: inline-block;
+          }
+          .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 11px;
+            color: #A1887F;
+            border-top: 1px dashed #D7CCC8;
+            padding-top: 15px;
+            line-height: 1.5;
+          }
+          @media print {
+            body {
+              padding: 20px 0;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h1>☕ Cardápio Semanal Inteligente</h1>
+          <p>Nutrição ETECIA — Planejamento de Combinações Saudáveis</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Dia</th>
+              <th>Bebida</th>
+              <th>Combinação de Alimentos</th>
+              <th style="text-align: right;">Calorias</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsHtml}
+          </tbody>
+        </table>
+        <div class="footer">
+          Café da Manhã Inteligente • Material Educativo<br>
+          As informações e cálculos são estimativas aproximadas e não substituem a orientação individualizada de um nutricionista ou profissional de saúde.
+        </div>
+        <script>
+          window.onload = function() {
+            window.print();
+          }
+        </script>
+      </body>
+      </html>
+    `);
+    win.document.close();
   }
 }
 
